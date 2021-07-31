@@ -5,6 +5,7 @@ import connect from './config/connect';
 import bodyParser from "body-parser";
 import cors from 'cors';
 const port = Number(process.env.PORT || 4000);
+import apiRouter from "./routers/api";
 
 const logRequest = (req: Request, res: Response, next: NextFunction) => {
     console.log(req);
@@ -19,12 +20,15 @@ const options: cors.CorsOptions = {
 };
 
 app.use(logRequest);
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get( "/", (req, res) => {
     res.send( "Hello From Express With TypeScript" );
 });
+
+app.use("/api",apiRouter);
 
 app.listen(port, () => {
     console.log(`server started on port ${port}`);
