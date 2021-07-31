@@ -1,7 +1,7 @@
 import {User} from "../types/userTypes";
 import UserModel from '../models/User';
 
-export const createNewUser = async (user: User) => {
+export const persistUser = async (user: User) => {
     const newUser = new UserModel(user);
 
     if (!newUser) {
@@ -10,5 +10,9 @@ export const createNewUser = async (user: User) => {
     }
 
     return  await newUser.save();
+}
+
+export const fetchUsers = async () => {
+    return UserModel.find({});
 }
 

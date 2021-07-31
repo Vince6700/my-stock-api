@@ -8,7 +8,7 @@ const port = Number(process.env.PORT || 4000);
 import apiRouter from "./routers/api";
 
 const logRequest = (req: Request, res: Response, next: NextFunction) => {
-    console.log(req);
+    console.log(req.body);
     next();
 }
 
@@ -19,10 +19,10 @@ const options: cors.CorsOptions = {
     origin: allowedOrigins
 };
 
-app.use(logRequest);
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(logRequest);
 
 app.get( "/", (req, res) => {
     res.send( "Hello From Express With TypeScript" );

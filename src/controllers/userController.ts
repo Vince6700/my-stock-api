@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {createNewUser} from "../services/userService";
+import {persistUser, fetchUsers} from "../services/userService";
 
 export const createUser = async (req: Request, res: Response) => {
     const body = req.body;
@@ -12,7 +12,7 @@ export const createUser = async (req: Request, res: Response) => {
     }
 
     try {
-        const result = await createNewUser(body);
+        const result = await persistUser(body);
         return res.status(200).json(result);
     } catch (e) {
         return res.status(500).json(e)
@@ -20,5 +20,10 @@ export const createUser = async (req: Request, res: Response) => {
 }
 
 export const getUsers = async (req: Request, res: Response) => {
-
+    try {
+        const result = await fetchUsers();
+        return res.status(200).json(result)
+    } catch (e) {
+        return res.status(500).json(e)
+    }
 }
