@@ -1,6 +1,5 @@
-import mongoose, {Schema, model} from "mongoose";
-import {User} from "../types/userTypes";
-
+import mongoose, { Schema, model } from 'mongoose'
+import { User } from '../types/userTypes'
 
 const userSchema = new Schema<User>(
     {
@@ -9,6 +8,6 @@ const userSchema = new Schema<User>(
         firstname: { type: String, required: true },
     },
     { timestamps: true }
-);
+)
 
-export default model<User>("userModel", userSchema);
+export default model<User>('userModel', userSchema)
